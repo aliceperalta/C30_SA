@@ -56,7 +56,7 @@ function keyPressed() { //função de quando a tecla é pressionada. Se fosse qu
 
 function keyReleased() { //função de quando a tecla é solta
   if (keyCode === DOWN_ARROW) { //tecla relacionada é a seta para baixo 
-    balls[balls.length - 1].shoot();
+    balls[balls.length - 1].shoot(); //chama a funçaõ de disparo das bolas, mas tambem interliga a mesma com o comprimentoda matriz que gera elas
   }
 }
 
