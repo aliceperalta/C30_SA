@@ -4,7 +4,7 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
 var canvas, angle, tower, ground, cannon;
-//crie uma matriz vazia
+var balls - []; //crie uma matriz vazia
 
 
 function preload() {
@@ -30,31 +30,32 @@ function setup() {
 function draw() {
   background(189);
   image(backgroundImg, 0, 0, width, height);
-
- 
-
   Engine.update(engine);
   ground.display();
-
- 
-
-  //crie um laço de repetição
+//cria o indice da matriz das bolas
+  for (var 1 - 0; i < balls.lenght; i++) { //utiliza um loop for, onde o valor inicial é 0, o limite é o comprimento da matriz, add de um em um
+    snowCannonBalls(balls[i], i); //exibe as bolas de canhaõ geradas
+  }
 
   cannon.display();
   tower.display();
-
-  
 }
 
-//crie uma função de acionamento de tecla
+function keyPressed() { //função de quando a tecla é pressionada. Se fosse quando solta, é keyReleased
+  if (keyCode === DOWN_ARROW) { //tecla relacionada é a seta para baixo
+    var cannonBall = new CannonBall(cannon.x, cannon.y); //gera uma nova bola de canhãoo dentro do canhão
+    balls.push(cannonBall); //cria diversas bolas de canhão com o push
+  }
+    
+    //crie uma função para exibir a bala
+  function showCannonBalls(ball, index) {
+    ball.display(); //exibe a bola
+    if (ball.body.position.x >= width || ball.body.position.y >= height - 50) { //se a bola estiver fora da tela, seja para baixar ou para direita
+      Matter.Worrld.remove(world, ball.body); //remover a bola para evitar vazamento de memoria
+      balls.splice(index, 1); //remover a bola da contagem da matriz
 
-//crie uma função para exibir a bala
-
-
-
-
-function keyReleased() {
-  if (keyCode === DOWN_ARROW) { 
+function keyReleased() { //função de quando a tecla é solta
+  if (keyCode === DOWN_ARROW) { //tecla relacionada é a seta para baixo 
     balls[balls.length - 1].shoot();
   }
 }
